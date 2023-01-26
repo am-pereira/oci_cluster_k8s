@@ -36,7 +36,7 @@ data "cloudinit_config" "_" {
           kubernetes.list:
             source: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
             key: |
-              ${indent(8, data.http.apt_repo_key.body)}
+              ${indent(8, data.http.apt_repo_key.response_body)}
       users:
       - default
       - name: k8s
@@ -155,7 +155,7 @@ data "http" "apt_repo_key" {
 
 resource "random_string" "token1" {
   length  = 6
-  number  = true
+  numeric  = true
   lower   = true
   special = false
   upper   = false
@@ -163,7 +163,7 @@ resource "random_string" "token1" {
 
 resource "random_string" "token2" {
   length  = 16
-  number  = true
+  numeric  = true
   lower   = true
   special = false
   upper   = false
